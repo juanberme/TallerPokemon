@@ -1,0 +1,109 @@
+package controller;
+
+import model.Logic;
+import processing.core.PApplet;
+import view.Main;
+
+public class Main_Controller {
+
+	private Logic lo;
+	private PApplet app;
+	private int pantallas;
+	
+	
+	public Main_Controller(Main main) {
+
+		lo = new Logic();
+		app = main;
+		pantallas=lo.getPantalla();
+		}
+
+	public void draw() {
+
+		lo.draw();
+
+	}
+
+	public void mousePressed() {
+
+		// Boton Start
+		if (app.mouseX > 205 && app.mouseX < 301 && app.mouseY > 217 && app.mouseY < 244) {
+
+		}
+
+		// Boton escoger nombre y continuar
+		if (app.mouseX > 378 && app.mouseX < 450 && app.mouseY > 200 && app.mouseY < 223) {
+
+		}
+
+		// Boton escoger osquirtle
+		if (app.mouseY > 245 && app.mouseY < 264 && app.mouseX > 194 && app.mouseX < 259) {
+
+		}
+
+		// Boton escoger charmalian
+		if (app.mouseY > 245 && app.mouseY < 264 && app.mouseX > 284 && app.mouseX < 346) {
+
+		}
+
+		// Boton escoger bermisaur
+		if (app.mouseY > 245 && app.mouseY < 264 && app.mouseX > 373 && app.mouseX < 435) {
+
+		}
+	}
+
+	public void keyPressed(char key) {
+
+		// personaje Caminando
+
+		// En menu para pasar a pokedex
+		if (pantallas == 3 && (key == 'p' || key == 'P')) {
+			lo.setPantalla(4);
+		} else {
+			if ((pantallas == 4 || pantallas == 5 || pantallas == 6 || pantallas == 7) && (key == 'p' || key == 'P')) {
+				lo.setPantalla(3);
+				
+			}
+		}
+
+		// Desplazarse en pokedex desde Osquirtle
+		if (pantallas == 4 && app.keyCode == app.UP) {
+			lo.setPantalla(6);
+		} else {
+			if (pantallas == 4 && app.keyCode == app.DOWN) {
+				lo.setPantalla(7);
+			} else {
+
+				// Desplazarse en pokedex desde Charmalian
+				if (pantallas == 5 && app.keyCode == app.UP) {
+					lo.setPantalla(7);
+				} else {
+					if (pantallas == 5 && app.keyCode == app.DOWN) {
+						lo.setPantalla(6);
+					} else {
+
+						// Desplazarse en pokedex desde Bermisaur
+						if (pantallas == 6 && app.keyCode == app.UP) {
+							lo.setPantalla(5);
+						} else if (pantallas == 6 && app.keyCode == app.DOWN) {
+							lo.setPantalla(4);
+
+						} else {
+
+							// Desplazarse en pokedex desde Ratata
+							if (pantallas == 7 && app.keyCode == app.UP) {
+								lo.setPantalla(4);
+							} else {
+								if (pantallas == 7 && app.keyCode == app.DOWN) {
+									lo.setPantalla(5);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+}

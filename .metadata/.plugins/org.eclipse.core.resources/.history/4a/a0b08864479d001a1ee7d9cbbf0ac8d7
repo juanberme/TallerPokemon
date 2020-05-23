@@ -1,0 +1,105 @@
+package view;
+
+import controller.Main_Controller;
+import processing.core.PApplet;
+import processing.core.PImage;
+
+
+
+
+
+public class Main extends PApplet {
+
+	//Instancia del controller
+	private Main_Controller mc;
+	
+	
+	//Declaración de variables 
+	int pantallas;
+	int posx;
+	int posy;
+	
+	boolean escogeOsquirtle;
+	boolean escogeCharmalian;
+	boolean escogeBermisaur;
+	boolean escogeRatata;
+
+	PImage fondo;
+	PImage fondoCuadricula;
+	PImage inicio;
+	PImage interior;
+	PImage pokedexOsqui;
+	PImage pokedexBermi;
+	PImage pokedexJuli;
+	PImage pokedexRatata;
+	PImage saludo;
+	PImage saludoProfesor;
+	PImage interrogante;
+	PImage arriba;
+	PImage abajo;
+	PImage izquierda;
+	PImage derecha;
+
+	public static void main(String[] args) {
+
+		PApplet.main("view.Main");
+
+	}
+
+
+	public void settings() {
+		size(500, 375);
+	}
+
+	public void setup() {
+
+		mc =new Main_Controller(this);
+		
+		
+		pantallas = 0;
+		posx = 239;
+		posy = 178;
+
+		escogeOsquirtle = false;
+		escogeCharmalian = false;
+		escogeBermisaur = false;
+		escogeRatata = false;
+
+		fondo = loadImage("../insumos/fondo.png");
+		fondoCuadricula = loadImage("../insumos/fondoCuadricula.png");
+		inicio = loadImage("../insumos/inicio.png");
+		interior = loadImage("../insumos/interior.png");
+		pokedexOsqui = loadImage("../insumos/pokedexOsqui.png");
+		pokedexBermi = loadImage("../insumos/pokedexBermi.png");
+		pokedexJuli = loadImage("../insumos/pokedexJuli.png");
+		pokedexRatata = loadImage("../insumos/pokedexRatata.png");
+		saludo = loadImage("../insumos/saludo.png");
+		saludoProfesor = loadImage("../insumos/saludoProfesor.png");
+		interrogante = loadImage("../insumos/interrogante.png");
+		arriba = loadImage("../insumos/arriba.png");
+		abajo = loadImage("../insumos/abajo.png");
+		izquierda = loadImage("../insumos/izquierda.png");
+		derecha = loadImage("../insumos/derecha.png");
+	}
+
+	public void draw() {
+		
+		mc.draw();
+		
+
+	}
+
+	public void mousePressed() {
+
+		mc.mousePressed();
+		
+	}
+
+	public void keyPressed() {
+		
+		
+		mc.keyPressed(key);
+		
+	}
+
+}

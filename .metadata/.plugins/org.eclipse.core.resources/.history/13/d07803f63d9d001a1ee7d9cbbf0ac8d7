@@ -1,0 +1,23 @@
+package controller;
+
+import view.Main;
+
+public class Main_Controller {
+
+	public Main_Controller(Main main) {
+	
+	}
+
+	public void draw() {
+
+		
+		
+	}
+
+	public void mousePressed() {
+
+		
+		
+	}
+
+}

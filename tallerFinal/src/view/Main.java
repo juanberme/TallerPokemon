@@ -1,14 +1,24 @@
 package view;
 
+import controller.Main_Controller;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+
+
+
+
 public class Main extends PApplet {
 
+	//Instancia del controller
+	private Main_Controller mc;
+	
+	
+	//Declaración de variables 
 	int pantallas;
 	int posx;
 	int posy;
-
+	
 	boolean escogeOsquirtle;
 	boolean escogeCharmalian;
 	boolean escogeBermisaur;
@@ -36,9 +46,6 @@ public class Main extends PApplet {
 
 	}
 
-	public void preload() {
-
-	}
 
 	public void settings() {
 		size(500, 375);
@@ -46,6 +53,9 @@ public class Main extends PApplet {
 
 	public void setup() {
 
+		mc =new Main_Controller(this);
+		
+		
 		pantallas = 0;
 		posx = 239;
 		posy = 178;
@@ -73,6 +83,11 @@ public class Main extends PApplet {
 	}
 
 	public void draw() {
+		
+		mc.draw();
+		
+		
+		
 		background(100);
 
 		switch (pantallas) {
@@ -156,41 +171,15 @@ public class Main extends PApplet {
 
 	public void mousePressed() {
 
-		// Boton Start
-		if (pantallas == 0 && mouseX > 205 && mouseX < 301 && mouseY > 217 && mouseY < 244) {
-			pantallas += 1;
-		} else {
-
-			// Boton escoger nombre y continuar
-			if (pantallas == 1 && mouseX > 378 && mouseX < 450 && mouseY > 200 && mouseY < 223) {
-				pantallas += 1;
-			} else {
-
-				// Boton escoger osquirtle
-				if (pantallas == 2 && mouseY > 245 && mouseY < 264 && mouseX > 194 && mouseX < 259) {
-					pantallas += 1;
-					escogeOsquirtle = true;
-				} else {
-
-					// Boton escoger charmalian
-					if (pantallas == 2 && mouseY > 245 && mouseY < 264 && mouseX > 284 && mouseX < 346) {
-						pantallas += 1;
-						escogeCharmalian = true;
-					} else {
-
-						// Boton escoger bermisaur
-						if (pantallas == 2 && mouseY > 245 && mouseY < 264 && mouseX > 373 && mouseX < 435) {
-							pantallas += 1;
-							escogeBermisaur = true;
-						}
-					}
-				}
-			}
-		}
-
+		mc.mousePressed();
+		
 	}
 
 	public void keyPressed() {
+		
+		
+		mc.keyPressed(key);
+		
 		
 		//personaje Caminando
 		
@@ -249,8 +238,5 @@ public class Main extends PApplet {
 
 	}
 
-	
-	public void zonaCombate() {
 
-	}
 }

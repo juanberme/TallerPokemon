@@ -1,12 +1,5 @@
 package view;
 
-import processing.core.PApplet;
+public class ScreenViewInit {
 
-public class screenViewInit {
-
-	PApplet app;
-	
-	public void draw() {
-		
-	}
 }

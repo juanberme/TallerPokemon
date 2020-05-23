@@ -6,7 +6,7 @@ public class usuario implements Comparable<Object>{
 	int fecha;
 	
 	public usuario(String nombre, int fecha) {
-		
+		this.fecha=fecha;
 	}
 
 	@Override

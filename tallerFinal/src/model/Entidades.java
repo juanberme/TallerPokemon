@@ -4,6 +4,10 @@ import processing.core.PApplet;
 
 public abstract class Entidades implements Runnable {
 
+	private int poxm,poym;
+	
+	
+	
 	private int arribita, abajito, derechita, izquier;
 
 	public Entidades() {
@@ -35,6 +39,39 @@ public abstract class Entidades implements Runnable {
 
 	}
 
+	public int getPoxm() {
+		return poxm;
+	}
+
+	public void setPoxm(int poxm) {
+		this.poxm = poxm;
+	}
+
+	public int getPoym() {
+		return poym;
+	}
+
+	public void setPoym(int poym) {
+		this.poym = poym;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getArribita() {
 		return arribita;
 	}

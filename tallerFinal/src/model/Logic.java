@@ -43,13 +43,13 @@ public class Logic {
 	PImage saludoProfesor;
 	PImage interrogante;
 
-	int posx = 239;
-	int posy = 178;
+	float posx = 239;
+	float posy = 178;
 	boolean escogeOsquirtle;
 	boolean escogeCharmalian;
 	boolean escogeBermisaur;
 	boolean escogeRatata;
-	private int arribita,abajito,derechita,izquier;
+	private int arribita,abajito,derechita,izquier,pomax,pomay;
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -208,27 +208,61 @@ public class Logic {
 
 	public void movimientoarriba() {
 		
-		System.out.println("entro");
-		entidad.get(0).setArribita(1);
+		//System.out.println("arriba");
+		pomax= entidad.get(0).getPoxm();
+		pomay= entidad.get(0).getPoym();
+		System.out.println(matrizMapa[pomay][pomax]);
+		if(matrizMapa[pomay-1][pomax]==0 || matrizMapa[pomay-1][pomax]==3 ) {
+			
+			entidad.get(0).setArribita(1);
+			
+			
+		}
 		
+
 		
 	}
 	public void movimientoabajo() {
 		
+		//System.out.println("entro");
+		pomax= entidad.get(0).getPoxm();
+		pomay= entidad.get(0).getPoym();
+		System.out.println(matrizMapa[pomay][pomax]);
+		
+		if(matrizMapa[pomay+1][pomax]==0 || matrizMapa[pomay+1][pomax]==3) {
 		
 		entidad.get(0).setAbajito(1);
+		}
+		
+		
 		
 	}
 	public void movimientoladod() {
+		//System.out.println("entro");
+		pomax= entidad.get(0).getPoxm();
+		pomay= entidad.get(0).getPoym();
+		System.out.println(matrizMapa[pomay][pomax]);
 		
+		
+		if(matrizMapa[pomay][pomax+1]==0 || matrizMapa[pomay][pomax+1]==3) {
 		entidad.get(0).setDerechita(1);
+		
+		}
 		
 		
 		
 	}
 	public void movimientoladoi() {
 		
+		//System.out.println("entro");
+		pomax= entidad.get(0).getPoxm();
+		pomay= entidad.get(0).getPoym();
+		System.out.println(matrizMapa[pomay][pomax]);
+		
+		if(matrizMapa[pomay][pomax-1]==0 || matrizMapa[pomay][pomax-1]==3) {
 		entidad.get(0).setIzquier(1);
+		}
+		
 		
 	}
 	

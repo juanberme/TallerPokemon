@@ -22,16 +22,30 @@ public class Pokemon0 extends Entidades {
 	
 	public void draw(){
 		
+		if(pokemon==1) {
+			
+			
+			
+		}else if(pokemon==2) {
+			
+			
+			
+			
+		}else if (pokemon==3) {
+			
+			
+			
+		}
+		
+	
+		
 		
 		
 		
 		
 	}	
-	public void mover() {
-		
-		
-		
-		
-	}
+
+	
+	
 
 }

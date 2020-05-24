@@ -126,9 +126,7 @@ public class Logic {
 			entidad.get(0).draw();
 			
 			
-			Thread Nh;
-			Nh = new Thread(entidad.get(0));
-			Nh.start();
+			
 			
 			
 			

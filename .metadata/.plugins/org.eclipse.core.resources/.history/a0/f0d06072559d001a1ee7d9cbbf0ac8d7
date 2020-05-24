@@ -1,0 +1,36 @@
+package model;
+
+public abstract class Entidades implements Runnable{
+
+	public Entidades() {
+		
+		
+		
+		
+	}
+	
+	public void draw() {
+		
+		
+		
+		
+	}
+	
+	public void mover() {
+		
+		
+		
+		
+		
+	}
+	
+	@Override
+	public void run() {
+		
+		mover();
+		
+		
+	}
+	
+	
+}

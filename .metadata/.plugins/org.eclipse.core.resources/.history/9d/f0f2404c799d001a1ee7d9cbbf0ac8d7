@@ -1,0 +1,71 @@
+package model;
+
+import processing.core.PApplet;
+
+public abstract class Entidades implements Runnable{
+
+	private int arribita,abajito,derechita,izquier;
+	
+
+	public Entidades() {
+		
+	arribita=0;
+	abajito=0;
+	derechita=0;
+	izquier=0;
+		
+		
+	}
+	
+	public void draw() {
+		
+		
+		
+		
+	}
+	
+	public void movimientoarriba() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoabajo() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoladod() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoladoi() {
+		
+		
+		
+	}
+
+	
+
+
+	@Override
+	public void run() {
+		
+	
+
+		
+		movimientoabajo();
+		movimientoarriba();
+		movimientoladod();
+		movimientoladoi();
+		
+	}
+	
+	
+}

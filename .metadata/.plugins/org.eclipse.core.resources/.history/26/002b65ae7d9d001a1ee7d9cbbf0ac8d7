@@ -1,0 +1,61 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Jugador extends Entidades {
+	
+	private PApplet app;
+	private int posx,posy;
+	PImage arriba;
+	PImage abajo;
+	PImage izquierda;
+	PImage derecha;
+	
+
+	public Jugador(int pox, int poy, PApplet apP) {
+		
+		posx=pox;
+		posy=poy;
+		app=apP;
+		
+	}
+	
+	public void draw() {
+		
+		
+		app.image(abajo,posx,posy);
+		
+		
+	}
+
+	public void movimientoarriba() {
+
+		
+		
+	}
+
+	public void movimientoabajo() {
+
+		
+		
+		
+	}
+
+	public void movimientoladod() {
+
+		
+		
+	}
+
+	public void movimientoladoi() {
+
+		
+		
+		
+	}
+	
+	
+	
+
+}

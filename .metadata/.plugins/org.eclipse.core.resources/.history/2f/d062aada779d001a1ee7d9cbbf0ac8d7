@@ -1,0 +1,103 @@
+package model;
+
+public abstract class Entidades implements Runnable{
+
+	private boolean arribita,abajito,derechita,izquier;
+	
+
+	public Entidades() {
+		
+	arribita=false;
+	abajito=false;
+	derechita=false;
+	izquier=false;
+		
+		
+	}
+	
+	public void draw() {
+		
+		
+		
+		
+	}
+	
+	public void movimientoarriba() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoabajo() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoladod() {
+		
+		
+		
+		
+		
+	}
+	public void movimientoladoi() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	public boolean isArribita() {
+		return arribita;
+	}
+
+	public void setArribita(boolean arribita) {
+		this.arribita = arribita;
+	}
+
+	public boolean isAbajito() {
+		return abajito;
+	}
+
+	public void setAbajito(boolean abajito) {
+		this.abajito = abajito;
+	}
+
+	public boolean isDerechita() {
+		return derechita;
+	}
+
+	public void setDerechita(boolean derechita) {
+		this.derechita = derechita;
+	}
+
+	public boolean isIzquier() {
+		return izquier;
+	}
+
+	public void setIzquier(boolean izquier) {
+		this.izquier = izquier;
+	}
+	
+	@Override
+	public void run() {
+		
+		
+		
+		
+		movimientoabajo();
+		movimientoarriba();
+		movimientoladod();
+		movimientoladoi();
+		
+	}
+	
+	
+}

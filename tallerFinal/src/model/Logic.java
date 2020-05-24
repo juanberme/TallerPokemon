@@ -8,7 +8,7 @@ import processing.core.PImage;
 public class Logic {
 	private LinkedList <Entidades> entidad;
 	private LinkedList <Usuario> user;
-	private int pantalla=0;
+	private int pantalla,pox,poy;
 	private int matrizMapa[][] = 
 		{	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 			{1,1,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
@@ -42,17 +42,14 @@ public class Logic {
 	PImage saludo;
 	PImage saludoProfesor;
 	PImage interrogante;
-	PImage arriba;
-	PImage abajo;
-	PImage izquierda;
-	PImage derecha;
+
 	int posx = 239;
 	int posy = 178;
 	boolean escogeOsquirtle;
 	boolean escogeCharmalian;
 	boolean escogeBermisaur;
 	boolean escogeRatata;
-	
+	private int arribita,abajito,derechita,izquier;
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -64,6 +61,12 @@ public class Logic {
 		escogeRatata = false;
 		entidad = new LinkedList<Entidades>();
 		user = new LinkedList<Usuario>();
+		crearPersonajes();
+		
+	
+	
+		
+		
 		
 		
 	}
@@ -81,13 +84,19 @@ public class Logic {
 		saludo = apP.loadImage("../insumos/saludo.png");
 		saludoProfesor = apP.loadImage("../insumos/saludoProfesor.png");
 		interrogante = apP.loadImage("../insumos/interrogante.png");
-		arriba = apP.loadImage("../insumos/arriba.png");
-		abajo = apP.loadImage("../insumos/abajo.png");
-		izquierda = apP.loadImage("../insumos/izquierda.png");
-		derecha = apP.loadImage("../insumos/derecha.png");
+		
 	}
 	
-	 
+	public void crearPersonajes() {
+		
+		entidad.add(new Jugador(posx,posy,apP));
+		entidad.add(new Pokemon0(200,apP));
+		entidad.add(new Pokemon1(250,apP));
+		entidad.add(new Pokemon2(230,apP));
+		entidad.add(new Pokemon3(220,apP));
+		
+		
+	} 
 	public void draw() {
 		 
 		apP.background(100);
@@ -111,10 +120,16 @@ public class Logic {
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 3:
-			apP.image(fondo, 0, 0);
+			apP.image(fondoCuadricula, 0, 0);
 			
 			//personaje inicial
-			apP.image(abajo,posx,posy);
+			entidad.get(0).draw();
+			
+			
+			
+			
+			
+			
 			
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
@@ -168,8 +183,6 @@ public class Logic {
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		}
-
-		
 		
 		
 	}
@@ -190,5 +203,34 @@ public class Logic {
 	public void setPantalla(int pantalla) {
 		this.pantalla = pantalla;
 	}
+
+	public void movimientoarriba() {
+		
+		System.out.println("entro");
+		entidad.get(0).setArribita(1);
+		
+		
+	}
+	public void movimientoabajo() {
+		
+		
+		entidad.get(0).setAbajito(1);
+		
+	}
+	public void movimientoladod() {
+		
+		entidad.get(0).setDerechita(1);
+		
+		
+		
+	}
+	public void movimientoladoi() {
+		
+		entidad.get(0).setIzquier(1);
+		
+	}
+	
+	
+	
 	
 }

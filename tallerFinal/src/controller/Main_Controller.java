@@ -41,16 +41,22 @@ public class Main_Controller {
 
 			lo.setPantalla(3);
 			
+			
 		}
 
 		// Boton escoger charmalian
 		if (lo.getPantalla()==2 && app.mouseY > 245 && app.mouseY < 264 && app.mouseX > 284 && app.mouseX < 346) {
 			lo.setPantalla(3);
+			
+			
 		}
 
 		// Boton escoger bermisaur
 		if (lo.getPantalla()==2 && app.mouseY > 245 && app.mouseY < 264 && app.mouseX > 373 && app.mouseX < 435) {
 			lo.setPantalla(3);
+			
+			
+			
 		}
 	}
 

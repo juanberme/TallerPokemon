@@ -45,11 +45,8 @@ public class Logic {
 
 	float posx = 239;
 	float posy = 178;
-	boolean escogeOsquirtle;
-	boolean escogeCharmalian;
-	boolean escogeBermisaur;
-	boolean escogeRatata;
-	private int arribita,abajito,derechita,izquier,pomax,pomay;
+	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata;
+	private int pomax,pomay;
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -120,7 +117,7 @@ public class Logic {
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 3:
-			apP.image(fondoCuadricula, 0, 0);
+			apP.image(fondo, 0, 0);
 			
 			//personaje inicial
 			entidad.get(0).draw();

@@ -56,22 +56,6 @@ public abstract class Entidades implements Runnable {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int getArribita() {
 		return arribita;
 	}

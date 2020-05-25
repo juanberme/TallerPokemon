@@ -41,12 +41,34 @@ public class Logic {
 	PImage pokedexRatata;
 	PImage saludo;
 	PImage saludoProfesor;
-	PImage interrogante;
+	PImage ataque;
+	PImage registros;
+	PImage berDerecha;
+	PImage berIzquierda;
+	PImage charDerecha;
+	PImage charIzquierda;
+	PImage osqDerecha;
+	PImage osqIzquierda;
+	PImage ratDerecha;
+	PImage ratIzquierda;
+	PImage cincoIzquierda;
+	PImage cuatroIzquierda;
+	PImage tresIzquierda;
+	PImage dosIzquierda;
+	PImage unoIzquierda;
+	PImage cincoDerecha;
+	PImage cuatroDerecha;
+	PImage tresDerecha;
+	PImage dosDerecha;
+	PImage unoDerecha;
+	PImage tresIzq, dosIzq, unoIzq, tresDer, dosDer, unoDer;
+	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex;
 
 	float posx = 239;
 	float posy = 178;
 	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata;
 	private int pomax,pomay;
+	
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -59,12 +81,6 @@ public class Logic {
 		entidad = new LinkedList<Entidades>();
 		user = new LinkedList<Usuario>();
 		crearPersonajes();
-		
-	
-	
-		
-		
-		
 		
 	}
 	
@@ -80,7 +96,39 @@ public class Logic {
 		pokedexRatata = apP.loadImage("../insumos/pokedexRatata.png");
 		saludo = apP.loadImage("../insumos/saludo.png");
 		saludoProfesor = apP.loadImage("../insumos/saludoProfesor.png");
-		interrogante = apP.loadImage("../insumos/interrogante.png");
+		
+		tresIzq = apP.loadImage("../insumos/tresIzq.png");
+		dosIzq = apP.loadImage("../insumos/dosIzq.png");
+		unoIzq = apP.loadImage("../insumos/unoIzq.png");
+		tresDer = apP.loadImage("../insumos/tresDer.png");
+		dosDer = apP.loadImage("../insumos/dosDer.png");
+		unoDer = apP.loadImage("../insumos/unoDer.png");
+		juliPokedex = apP.loadImage("../insumos/juliPokedex.png"); 
+		osquiPokedex = apP.loadImage("../insumos/osquiPokedex.png");
+		rataPokedex = apP.loadImage("../insumos/rataPokedex.png");
+		bermiPokedex = apP.loadImage("../insumos/bermiPokedex.png");
+		pokedex = apP.loadImage("../insumos/pokedex.png");
+		
+		ataque = apP.loadImage("../insumos/ataque.png");
+		registros = apP.loadImage("../insumos/registros.png");
+		berDerecha = apP.loadImage("../insumos/berDerecha.png");
+		berIzquierda = apP.loadImage("../insumos/berIzquierda.png");
+		charDerecha = apP.loadImage("../insumos/charDerecha.png");
+		charIzquierda = apP.loadImage("../insumos/charIzquierda.png");
+		osqDerecha = apP.loadImage("../insumos/osqDerecha.png");
+		osqIzquierda = apP.loadImage("../insumos/osqIzquierda.png");
+		ratDerecha = apP.loadImage("../insumos/ratDerecha.png");
+		ratIzquierda = apP.loadImage("../insumos/ratIzquierda.png");
+		cincoIzquierda = apP.loadImage("../insumos/cincoIzquierda.png");
+		cuatroIzquierda = apP.loadImage("../insumos/cuatroIzquierda.png");
+		tresIzquierda = apP.loadImage("../insumos/tresIzquierda.png");
+		dosIzquierda = apP.loadImage("../insumos/dosIzquierda.png");
+		unoIzquierda = apP.loadImage("../insumos/unoIzquierda.png");
+		cincoDerecha = apP.loadImage("../insumos/cincoDerecha.png");
+		cuatroDerecha = apP.loadImage("../insumos/cuatroDerecha.png");
+		tresDerecha = apP.loadImage("../insumos/tresDerecha.png");
+		dosDerecha = apP.loadImage("../insumos/dosDerecha.png");
+		unoDerecha = apP.loadImage("../insumos/unoDerecha.png");
 		
 	}
 	
@@ -128,19 +176,13 @@ public class Logic {
 			Nh.start();
 			
 			
-			
-			
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 
 		// pokedex Osquirtle
 		case 4:
-			apP.image(pokedexOsqui, 0, 0);
-
-			if (escogeOsquirtle == false) {
-				apP.image(interrogante, 0, 0);
-			}
+			apP.image(pokedex, 0, 0);
 
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
@@ -150,10 +192,6 @@ public class Logic {
 		case 5:
 			apP.image(pokedexJuli, 0, 0);
 
-			if (escogeCharmalian == false) {
-				apP.image(interrogante, 0, 0);
-			}
-
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
@@ -162,10 +200,6 @@ public class Logic {
 		case 6:
 			apP.image(pokedexBermi, 0, 0);
 
-			if (escogeBermisaur == false) {
-				apP.image(interrogante, 0, 0);
-			}
-
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
@@ -173,10 +207,6 @@ public class Logic {
 		// pokedex Ratata
 		case 7:
 			apP.image(pokedexRatata, 0, 0);
-
-			if (escogeRatata == false) {
-				apP.image(interrogante, 0, 0);
-			}
 
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);

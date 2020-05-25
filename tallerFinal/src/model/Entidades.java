@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public abstract class Entidades implements Runnable {
 
 	private int poxm,poym;
-	
+	private float posx,posy;
 	
 	
 	private int arribita, abajito, derechita, izquier;
@@ -21,6 +21,25 @@ public abstract class Entidades implements Runnable {
 
 	public void draw() {
 
+	}
+
+	
+	
+	
+	public float getPosx() {
+		return posx;
+	}
+
+	public void setPosx(float posx) {
+		this.posx = posx;
+	}
+
+	public float getPosy() {
+		return posy;
+	}
+
+	public void setPosy(float posy) {
+		this.posy = posy;
 	}
 
 	public void movimientoarriba() {

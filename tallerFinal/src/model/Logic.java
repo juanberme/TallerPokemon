@@ -67,7 +67,8 @@ public class Logic {
 	float posx = 239;
 	float posy = 178;
 	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata;
-	private int pomax,pomay;
+	private int pomax,pomay,pokemn=0;
+	private float posxper,posyper;
 	
 	
 	public Logic(PApplet app) {
@@ -135,7 +136,9 @@ public class Logic {
 	public void crearPersonajes() {
 		
 		entidad.add(new Jugador(posx,posy,apP));
-		entidad.add(new Pokemon0(200,apP));
+		posxper= entidad.get(0).getPosx();
+		posyper = entidad.get(0).getPosy();
+		entidad.add(new Pokemon0(200,apP,pokemn,posxper,posyper));
 		entidad.add(new Pokemon1(250,apP));
 		entidad.add(new Pokemon2(230,apP));
 		entidad.add(new Pokemon3(220,apP));
@@ -292,6 +295,19 @@ public class Logic {
 		
 		
 	}
+
+	
+	
+	public int getPokemn() {
+		return pokemn;
+	}
+
+	public void setPokemn(int pokemn) {
+		this.pokemn = pokemn;
+	}
+
+	
+	
 	
 	
 	

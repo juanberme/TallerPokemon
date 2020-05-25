@@ -106,44 +106,18 @@ public class Main_Controller {
 			}
 		}
 
-		// Desplazarse en pokedex desde Osquirtle
-		if (lo.getPantalla()==4 && app.keyCode == app.UP) {
-			lo.setPantalla(6);
-		} else {
-			if (lo.getPantalla()==4 && app.keyCode == app.DOWN) {
-				lo.setPantalla(7);
-			} else {
-
-				// Desplazarse en pokedex desde Charmalian
-				if (lo.getPantalla()==5 && app.keyCode == app.UP) {
-					lo.setPantalla(7);
-				} else {
-					if (lo.getPantalla()==5 && app.keyCode == app.DOWN) {
-						lo.setPantalla(6);
-					} else {
-
-						// Desplazarse en pokedex desde Bermisaur
-						if (lo.getPantalla()==6&& app.keyCode == app.UP) {
-							lo.setPantalla(5);
-						} else if (lo.getPantalla()==6 && app.keyCode == app.DOWN) {
-							lo.setPantalla(4);
-
-						} else {
-
-							// Desplazarse en pokedex desde Ratata
-							if (lo.getPantalla()==7 && app.keyCode == app.UP) {
-								lo.setPantalla(4);
-							} else {
-								if (lo.getPantalla()==7 && app.keyCode == app.DOWN) {
-									lo.setPantalla(5);
-								}
-							}
-						}
-					}
-				}
-			}
+		// Desplazarse desde pokedex a registros y devolverse
+		if (lo.getPantalla()==4 && (key == 'r' || key == 'R')) {
+			lo.setPantalla(8);
+		} else if(lo.getPantalla()==8 && (key == 'p' || key == 'P')) {
+			lo.setPantalla(4);
 		}
+				
+			
+		
+		
+		
 
-	}
+	} // llave del keyPressed
 
 }

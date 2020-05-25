@@ -125,13 +125,13 @@ public class Logic {
 			//personaje inicial
 			entidad.get(0).draw();
 			
-			
+			for(int i=0;i<2;i++) {
 			Thread Nh;
-			Nh = new Thread(entidad.get(0));
+			Nh = new Thread(entidad.get(i));
 			Nh.start();
 			
 			
-			
+			}
 			
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);

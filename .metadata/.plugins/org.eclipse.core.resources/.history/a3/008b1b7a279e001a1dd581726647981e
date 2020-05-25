@@ -226,20 +226,7 @@ public class Logic {
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
-			
-		// registros	
-		case 8:
-			apP.image(registros, 0, 0);
-
-			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
-			break;
-			
-			
-			
-			
-			
-		}//llave del switch
+		}
 		
 		
 	}

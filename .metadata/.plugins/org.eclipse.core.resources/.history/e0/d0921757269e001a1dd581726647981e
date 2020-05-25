@@ -63,8 +63,7 @@ public class Logic {
 	PImage unoDerecha;
 	PImage tresIzq, dosIzq, unoIzq, tresDer, dosDer, unoDer;
 	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex;
-	PImage derJuli, derOsqui, frenteBermi, derBermi, frenteOsqui, atrasBermi, frenteJuli, izqBermi, izqJuli, izqOsqui;
-	
+
 	float posx = 239;
 	float posy = 178;
 	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata;
@@ -131,17 +130,6 @@ public class Logic {
 		tresDerecha = apP.loadImage("../insumos/tresDerecha.png");
 		dosDerecha = apP.loadImage("../insumos/dosDerecha.png");
 		unoDerecha = apP.loadImage("../insumos/unoDerecha.png");
-		
-		derJuli = apP.loadImage("../insumos/derJuli.png");
-		derOsqui = apP.loadImage("../insumos/derOsqui.png");
-		frenteBermi = apP.loadImage("../insumos/frenteBermi.png");
-		derBermi = apP.loadImage("../insumos/derBermi.png");
-		frenteOsqui = apP.loadImage("../insumos/frenteOsqui.png");
-		atrasBermi = apP.loadImage("../insumos/atrasBermi.png");
-		frenteJuli = apP.loadImage("../insumos/frenteBermi.png");
-		izqBermi = apP.loadImage("../insumos/izqBermi.png");
-		izqJuli = apP.loadImage("../insumos/izqJuli.png");
-		izqOsqui = apP.loadImage("../insumos/izqOsqui.png");
 		
 	}
 	
@@ -226,20 +214,7 @@ public class Logic {
 			apP.textSize(10);
 			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
-			
-		// registros	
-		case 8:
-			apP.image(registros, 0, 0);
-
-			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
-			break;
-			
-			
-			
-			
-			
-		}//llave del switch
+		}
 		
 		
 	}

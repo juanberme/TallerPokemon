@@ -106,12 +106,10 @@ public class Main_Controller {
 			}
 		}
 
-		// Desplazarse desde pokedex a registros y devolverse
+		// Desplazarse desde pokedex a registros
 		if (lo.getPantalla()==4 && (key == 'r' || key == 'R')) {
 			lo.setPantalla(8);
-		} else if(lo.getPantalla()==8 && (key == 'p' || key == 'P')) {
-			lo.setPantalla(4);
-		}
+		} 
 				
 			
 		

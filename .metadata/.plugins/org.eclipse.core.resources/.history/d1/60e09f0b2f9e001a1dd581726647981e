@@ -5,13 +5,18 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 
+
+
+
 public class Main extends PApplet {
 
 	//Instancia del controller
 	private Main_Controller mc;
 
 	public static void main(String[] args) {
+
 		PApplet.main("view.Main");
+
 	}
 
 
@@ -20,19 +25,30 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
+
 		mc =new Main_Controller(this);
+		
+		
 	}
 
 	public void draw() {
+		
 		mc.draw();
+		
+
 	}
 
 	public void mousePressed() {
+
 		mc.mousePressed();
+		
 	}
 
 	public void keyPressed() {
+		
+		
 		mc.keyPressed(key);
+		
 	}
 
 }

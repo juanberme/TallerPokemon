@@ -3,32 +3,30 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Pokemon1 extends Entidades  {
+public class Pokemon4 extends Entidades{
 
 	private PApplet app;
 	private String Nombre,Poder;
-	private int at1,at2,at3,at4,vida,nivel;
-	
-	
-
-	public Pokemon1(PImage imagen, String nombre, String poder, PApplet apP) {
-		super(imagen,  nombre,  poder, apP);
-		app=apP;
-		Nombre=nombre;
+	private int at1,at2,at3,at4,vida, nivel;
+	public Pokemon4(PImage imagen, String nombre, String poder, PApplet apP2) {
+		super(imagen,  nombre,  poder, apP2);
+		vida=250;
+		app=apP2;
+		this.Nombre=nombre;
 		Poder=poder;
 		at1= 20;
 		at2=30; 
 		at3=20;
 		at4=20;
-		vida=230;
-		nivel = 2;
+		nivel = 3; 
 	}
+	
+	
 public void regenerar() {
 		
-		vida = 230;
+		vida = 250;
 		
 	}
-
 	public int getVida() {
 		return vida;
 	}
@@ -38,6 +36,49 @@ public void regenerar() {
 	public void setVida(int vida) {
 		this.vida = vida;
 	}
+
+	
+	public String getNombre() {
+		return Nombre;
+	}
+
+
+
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
+	}
+
+
+
+
+	public String getPoder() {
+		return Poder;
+	}
+
+
+
+
+	public void setPoder(String poder) {
+		Poder = poder;
+	}
+
+
+	public void draw(float posx,float posy){
+		
+		try {
+			
+		app.image(getImagenFinal(),posx, posy);
+		
+		}catch (NullPointerException e) {
+			
+			
+			
+		}
+		
+		
+	}
+
 
 	public int getAt1() {
 		return at1;
@@ -77,38 +118,7 @@ public void regenerar() {
 	public void setAt4(int at4) {
 		this.at4 = at4;
 	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-
-
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
-
-
-
-	public String getPoder() {
-		return Poder;
-	}
-
-
-
-	public void setPoder(String poder) {
-		Poder = poder;
-	}
-
-	public void draw(float posx,float posy){
 	
-		//System.out.println("mostrar");
-		app.image(getImagenFinal(),posx, posy);
-		
-
-	}
-
-
 	
 	@Override
 	public int compareTo(Entidades arg0) {

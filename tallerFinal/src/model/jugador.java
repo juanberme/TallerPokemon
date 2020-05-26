@@ -107,6 +107,19 @@ public class Jugador extends Entidades {
 		
 	}
 
+	
+	public void regenerar() {
+		
+		posx= 239;
+		posy= 178;
+		setPoym(9);
+		setPoxm(11);
+		
+		
+		
+		
+		
+	}
 	public void movimientoarriba() {
 		
 		
@@ -159,6 +172,12 @@ public class Jugador extends Entidades {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	@Override
+	public int compareTo(Entidades o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

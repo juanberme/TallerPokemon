@@ -1,12 +1,17 @@
 package model;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
+import exceptions.Excepcion1;
+import exceptions.Excepcion2;
+import exceptions.Excepcion3;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Logic {
 	private LinkedList <Entidades> entidad;
+	private LinkedList <Entidades> entidad2;
 	private LinkedList <Usuario> user;
 	private int pantalla,pox,poy;
 	private int matrizMapa[][] = 
@@ -31,7 +36,7 @@ public class Logic {
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 	private PApplet apP;
-	PImage fondo;
+	PImage fondo,batalla;
 	PImage fondoCuadricula;
 	PImage inicio;
 	PImage interior;
@@ -62,15 +67,16 @@ public class Logic {
 	PImage dosDerecha;
 	PImage unoDerecha;
 	PImage tresIzq, dosIzq, unoIzq, tresDer, dosDer, unoDer;
-	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex;
-	PImage derJuli, derOsqui, frenteBermi, derBermi, frenteOsqui, atrasBermi, frenteJuli, izqBermi, izqJuli, izqOsqui;
+	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex,mens1,mens2,mens3,mens4;
 	
+	private PoderValue pv;
+	private NombreValue nv;
 	float posx = 239;
 	float posy = 178;
-	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata;
-	private int pomax,pomay,pokemn=0;
-	private float posxper,posyper;
-	
+	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata,entro=false,ataquemos=false,mensaje1=false, mensaje2=false, mensaje3=false,pokebol=false,mensaje4=false;
+	private int pomax,pomay,pokemn=0,ordenado,enemigo, cv1,cv2,cv3,cv4,calculadoravitalidad,framer,framer2,framer3=60,framer4;
+	private float posxper,posyper,podex=34,podey=113;
+	private String[] info1;
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -81,8 +87,45 @@ public class Logic {
 		escogeBermisaur = false;
 		escogeRatata = false;
 		entidad = new LinkedList<Entidades>();
+		entidad2 = new LinkedList<Entidades>();
 		user = new LinkedList<Usuario>();
-		crearPersonajes();
+		//crearPersonajes();
+		info1 = apP.loadStrings("../insumos/datos.txt");
+		//System.out.println(info1.length);
+		pv= new PoderValue();
+		nv= new NombreValue();
+		cargarTexto();
+		
+	}
+	
+	public void cargarTexto() {
+		
+		for (int i=0; i<info1.length;i++) {
+			String[] ordenar= info1[i].split(",");
+			String nombre = ordenar[0];
+			String poder = ordenar[1];
+			PImage imagen = apP.loadImage("../insumos/"+nombre+".png");
+			//System.out.println(nombre);
+			if(ordenar[0].contentEquals("juliPokedex")) {
+				
+				entidad2.add(new Pokemon1(imagen,nombre,poder,apP));
+				
+			}else if(ordenar[0].contentEquals("bermiPokedex")){
+				
+				entidad2.add(new Pokemon2(imagen,nombre,poder,apP));
+			}else if (ordenar[0].contentEquals("rataPokedex")){
+				
+				entidad2.add(new Pokemon3(imagen,nombre,poder,apP));
+			}else if(ordenar[0].contentEquals("osquiPokedex")) {
+				
+				entidad2.add(new Pokemon4(imagen,nombre,poder,apP));
+				
+			}
+			
+			
+			
+		}
+		
 		
 	}
 	
@@ -131,29 +174,22 @@ public class Logic {
 		tresDerecha = apP.loadImage("../insumos/tresDerecha.png");
 		dosDerecha = apP.loadImage("../insumos/dosDerecha.png");
 		unoDerecha = apP.loadImage("../insumos/unoDerecha.png");
+		batalla = apP.loadImage("../insumos/batalla.png");
 		
-		derJuli = apP.loadImage("../insumos/derJuli.png");
-		derOsqui = apP.loadImage("../insumos/derOsqui.png");
-		frenteBermi = apP.loadImage("../insumos/frenteBermi.png");
-		derBermi = apP.loadImage("../insumos/derBermi.png");
-		frenteOsqui = apP.loadImage("../insumos/frenteOsqui.png");
-		atrasBermi = apP.loadImage("../insumos/atrasBermi.png");
-		frenteJuli = apP.loadImage("../insumos/frenteBermi.png");
-		izqBermi = apP.loadImage("../insumos/izqBermi.png");
-		izqJuli = apP.loadImage("../insumos/izqJuli.png");
-		izqOsqui = apP.loadImage("../insumos/izqOsqui.png");
-		
+		mens1= apP.loadImage("../insumos/mensajePerdiste.png");
+		mens2= apP.loadImage("../insumos/mensajeSD.png");
+		mens3= apP.loadImage("../insumos/mensajeEnemigoFuerte.png");
+		mens4= apP.loadImage("../insumos/mensajeSalvajeCapturado.png");
 	}
 	
-	public void crearPersonajes() {
+	public void crearPersonajes(int pokemn2) {
 		
 		entidad.add(new Jugador(posx,posy,apP));
 		posxper= entidad.get(0).getPosx();
-		posyper = entidad.get(0).getPosy();
-		entidad.add(new Pokemon0(200,apP,pokemn,posxper,posyper));
-		entidad.add(new Pokemon1(250,apP));
-		entidad.add(new Pokemon2(230,apP));
-		entidad.add(new Pokemon3(220,apP));
+		posyper =(entidad.get(0).getPosy());
+		//System.out.println(pokemn2);
+		entidad.add(new Pokemon0(230,apP,pokemn2,posxper,posyper));
+		
 		
 		
 	} 
@@ -166,24 +202,32 @@ public class Logic {
 		case 0:
 			apP.image(inicio, 0, 0);
 			apP.textSize(25);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 1:
 			apP.image(saludo, 0, 0);
 			apP.fill(0);
 			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 2:
 			apP.image(saludoProfesor, 0, 0);
 			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 3:
 			apP.image(fondo, 0, 0);
+			setPokemn(pokemn);
+			if (entro==false) {
+			crearPersonajes(pokemn);
+			entro=true;
 			
+			
+			}
 			//personaje inicial
 			entidad.get(0).draw();
+			entidad.get(1).draw(entidad.get(0).getPosx(),entidad.get(0).getPosy());
+			
 			
 			for(int i=0;i<2;i++) {
 			Thread Nh;
@@ -191,57 +235,229 @@ public class Logic {
 			Nh.start();
 			
 			
-<<<<<<< HEAD
 			}
-			
-=======
->>>>>>> 6576750f2f0a9bdf9147a7b2a8a5fe5f656a708f
+
 			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 
-		// pokedex Osquirtle
+		// pokedex 
 		case 4:
 			apP.image(pokedex, 0, 0);
 
 			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			
+			
+			//entidad2.get(0).draw(podex,podey);
+			
+			for (int i=0;i<entidad2.size();i++) {
+				
+				//System.out.println("entra");
+				entidad2.get(i).draw(podex,podey);
+				podey=podey+60;
+			
+				
+			}
+			podey=113;
+			
 			break;
 
-		// pokedex Charmalian
-		case 5:
-			apP.image(pokedexJuli, 0, 0);
-
-			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
-			break;
-
-		// pokedex Bermisaur
-		case 6:
-			apP.image(pokedexBermi, 0, 0);
-
-			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
-			break;
-
-		// pokedex Ratata
-		case 7:
-			apP.image(pokedexRatata, 0, 0);
-
-			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
-			break;
 			
 		// registros	
-		case 8:
+		case 5:
 			apP.image(registros, 0, 0);
 
 			apP.textSize(10);
-			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
+		
+			
+		//Zona de combate
+		case 6:
+			
+			apP.image(batalla, 0, 0);
+			
+			if (getPokemn()==1) {
+				
+				apP.image(osqIzquierda, 0, 0);
+				
+				
+			}else if(getPokemn()==2) {
+				
+				apP.image(charIzquierda, 0, 0);
+				
+				
+			}else if(getPokemn()==3) {
+				
+				apP.image(berIzquierda, 0, 0);
+				
+			}
+			
+			if(enemigo==1) {
+				
+				apP.image(charDerecha, 0, 0);
+				apP.image(dosDer, 0, 0);
+				
+			}else if(enemigo==2) {
+				
+				apP.image(berDerecha, 0, 0);
+				apP.image(dosDer, 0, 0);
+				
+			}else if(enemigo==3) {
+				
+				apP.image(ratDerecha, 0, 0);
+				apP.image(unoDer, 0, 0);
+				
+			}else if(enemigo == 4) {
+				
+				
+				apP.image(osqDerecha, 0, 0);
+				apP.image(tresDer, 0, 0);
+			}
+			apP.image(dosIzq, 0, 0);
+			
+			apP.textSize(10);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			
+			
+		break;
+		case 7:
+			
+			apP.image(ataque, 0, 0);
+			
+			if (getPokemn()==1) {
+				
+				apP.image(osqIzquierda, 0, 0);
+				
+				
+			}else if(getPokemn()==2) {
+				
+				apP.image(charIzquierda, 0, 0);
+				
+				
+			}else if(getPokemn()==3) {
+				
+				apP.image(berIzquierda, 0, 0);
+				
+			}
+			
+			if(enemigo==1) {
+				
+				apP.image(charDerecha, 0, 0);
+				apP.image(dosDer, 0, 0);
+				
+			}else if(enemigo==2) {
+				
+				apP.image(berDerecha, 0, 0);
+				apP.image(dosDer, 0, 0);
+				
+			}else if(enemigo==3) {
+				
+				apP.image(ratDerecha, 0, 0);
+				apP.image(unoDer, 0, 0);
+				
+			}else if(enemigo == 4) {
+				
+				
+				apP.image(osqDerecha, 0, 0);
+				apP.image(tresDer, 0, 0);
+			}
+			
+			if (ataquemos==true) {
+				
+				if(apP.frameCount - framer == 60) {
+				int vidita = entidad.get(1).getVida();
+				int ataque = entidad2.get(enemigo-1).getAt1();
+				entidad.get(1).setVida(vidita-ataque);
+				//System.out.println(entidad.get(1).getVida());
+				ataquemos=false;
+				
+				}
+			}
+			try {
+				
+				primerae();
+				
+				
+			}catch (Excepcion1 e){
+				
+				
+				
+			}
+			try {
+				
+				segundae();
+				
+				
+			}catch (Excepcion2 e){
+				
+				
+				
+			}
+			
+			if (pokebol==true && (cv1 > 41 || cv2 > 41 || cv3 > 41 || cv4 > 41)) {
+				
+				mensaje3 = true;
+				
+			}else if (pokebol==true && (cv1 < 41 || cv2 < 41 || cv3 < 41 || cv4 < 41)){
+				
+				mensaje4=true;
+				
+			}
 			
 			
 			
+			apP.image(dosIzq, 0, 0);
+			apP.textSize(20);
+			apP.text(entidad.get(1).getVida(), 186, 150);
+			apP.text(entidad2.get(enemigo-1).getVida(), 457, 150);
+			apP.textSize(10);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			vida();
+			
+			if (mensaje1==true) {
+				apP.image(mens1, 0, 0);
+				if(apP.frameCount - framer2 == 90) {
+					entidad.get(1).regenerar();
+					entidad2.get(enemigo-1).regenerar();
+					entidad.get(0).regenerar();
+					pantalla=3;
+					//mensaje1=false;
+					}
+			}
+			
+			if (mensaje2==true) {
+				apP.image(mens2, 0, 0);
+				if(apP.frameCount - framer2 == 90) {
+					entidad.get(1).regenerar();
+					entidad2.get(enemigo-1).regenerar();
+					entidad.get(0).regenerar();
+					pantalla=3;
+					//mensaje1=false;
+					}
+			}
+			if (mensaje3==true) {
+				apP.image(mens3, 0, 0);
+				pokebol=false;
+			
+			}
+			
+			if (mensaje4==true) {
+				apP.image(mens4, 0, 0);
+				pokebol=false;
+				if(apP.frameCount - framer4 == 30) {
+					entidad.get(1).regenerar();
+					entidad2.get(enemigo-1).regenerar();
+					entidad.get(0).regenerar();
+					pantalla=3;
+					//mensaje1=false;
+					}
+			}
+			
+			
+		break;
+				
 			
 			
 		}//llave del switch
@@ -271,10 +487,11 @@ public class Logic {
 		//System.out.println("arriba");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		System.out.println(matrizMapa[pomay][pomax]);
+		//System.out.println(matrizMapa[pomay][pomax]);
 		if(matrizMapa[pomay-1][pomax]==0 || matrizMapa[pomay-1][pomax]==3 ) {
 			
 			entidad.get(0).setArribita(1);
+			entidad.get(1).setArribita(1);
 			
 			
 		}
@@ -287,11 +504,12 @@ public class Logic {
 		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		System.out.println(matrizMapa[pomay][pomax]);
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay+1][pomax]==0 || matrizMapa[pomay+1][pomax]==3) {
 		
 		entidad.get(0).setAbajito(1);
+		entidad.get(1).setAbajito(1);
 		}
 		
 		
@@ -301,12 +519,12 @@ public class Logic {
 		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		System.out.println(matrizMapa[pomay][pomax]);
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		
 		if(matrizMapa[pomay][pomax+1]==0 || matrizMapa[pomay][pomax+1]==3) {
 		entidad.get(0).setDerechita(1);
-		
+		entidad.get(1).setDerechita(1);
 		}
 		
 		
@@ -317,27 +535,223 @@ public class Logic {
 		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		System.out.println(matrizMapa[pomay][pomax]);
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay][pomax-1]==0 || matrizMapa[pomay][pomax-1]==3) {
 		entidad.get(0).setIzquier(1);
+		entidad.get(1).setIzquier(1);
 		}
 		
 		
 	}
-
-	
-	
 	public int getPokemn() {
 		return pokemn;
 	}
-
 	public void setPokemn(int pokemn) {
 		this.pokemn = pokemn;
 	}
 
 	
 	
+	public void ordenar(int i) {
+		
+		
+		switch (i) {
+		case 0:
+			Collections.sort(entidad2,pv);
+			
+			break;
+
+		case 1:
+			Collections.sort(entidad2,nv);
+			
+			break;
+
+		}
+		
+	}
+
+	public void zonaCombate() {
+		
+		
+		
+		pomax= entidad.get(0).getPoxm();
+		pomay= entidad.get(0).getPoym();
+		
+		if(matrizMapa[pomay][pomax]==3 ) {
+			
+			int posi= (int) apP.random(1,11);
+			//System.out.println(posi);
+			if(posi>1 && posi<=2) {
+				System.out.println(posi);
+				
+				enemigo= (int) apP.random(1,5);
+				
+				setPantalla(6);
+			
+				
+			}
+			
+		}
+		
+		
+		
+	}
+
+	
+	public void ataque1() {
+		framer=apP.frameCount;
+		int ataquecito = entidad.get(1).getAt1();
+		int vidita= entidad2.get(enemigo-1).getVida();
+		entidad2.get(enemigo-1).setVida(vidita- ataquecito);
+		framer2 = apP.frameCount;
+	}
+	
+	public void ataque2() {
+		framer=apP.frameCount;
+		int ataquecito = entidad.get(1).getAt2();
+		int vidita= entidad2.get(enemigo-1).getVida();
+		entidad2.get(enemigo-1).setVida(vidita- ataquecito);
+		framer2 = apP.frameCount;
+		
+	}
+	
+	public void ataque3() {
+		framer=apP.frameCount;
+		int ataquecito = entidad.get(1).getAt3();
+		int vidita= entidad2.get(enemigo-1).getVida();
+		entidad2.get(enemigo-1).setVida(vidita- ataquecito);
+		framer2 = apP.frameCount;
+	}
+	
+	public void ataque4() {
+		
+		int ataquecito = entidad.get(1).getAt4();
+		int vidita= entidad2.get(enemigo-1).getVida();
+		entidad2.get(enemigo-1).setVida(vidita- ataquecito);
+		framer=apP.frameCount;
+		framer2 = apP.frameCount;
+	}
+
+	public boolean isAtaquemos() {
+		return ataquemos;
+	}
+
+	public void setAtaquemos(boolean ataquemos) {
+		this.ataquemos = ataquemos;
+	}
+	
+	public void vida()
+	{
+		
+	 calculadoravitalidad = 100 * entidad.get(1).getVida()/230;
+		//System.out.println(calculadoravitalidad);
+	 if(calculadoravitalidad > 0) {
+		 apP.image(unoIzquierda, 0, 0);
+		 if(calculadoravitalidad > 21) {
+			 apP.image(dosIzquierda, 0, 0);
+			 if(calculadoravitalidad > 41) {
+				 apP.image(tresIzquierda, 0, 0);
+				 if(calculadoravitalidad > 61) {
+					 apP.image(cuatroIzquierda, 0, 0);
+					 if(calculadoravitalidad > 81) {
+						 apP.image(cincoIzquierda, 0, 0);
+						 
+					 }
+				 }
+			 }
+		 }
+		 
+	 }
+	 
+	 
+	 
+	 
+		if (enemigo-1==0) {
+			 cv1 = 100 * entidad2.get(0).getVida()/230;
+			
+		}else if(enemigo-1==1) {
+			
+			 cv2 = 100 * entidad2.get(1).getVida()/230;
+			
+		}else if(enemigo-1 == 2) {
+			
+			 cv3 = 100 * entidad2.get(2).getVida()/220;
+			
+		}else if (enemigo-1==3) {
+			
+			 cv4 = 100 * entidad2.get(3).getVida()/250;
+		}
+	 
+		if(cv1 > 0 || cv2 > 0 || cv3 > 0 || cv4 > 0) {
+			apP.image(unoDerecha, 0, 0);
+			if(cv1 > 21 || cv2 >21 || cv3> 21 || cv4 >21) {
+				apP.image(dosDerecha, 0, 0);
+				if(cv1 > 41 || cv2 >41 || cv3 > 41 || cv4 > 41) {
+					apP.image(tresDerecha, 0, 0);
+					if(cv1 > 61 || cv2 >61 || cv3 > 61 || cv4 > 61) {
+						apP.image(cuatroDerecha, 0, 0);
+						if(cv1 > 81 || cv2 > 81 || cv3 > 81 || cv4 > 81) {
+							
+							apP.image(cincoDerecha, 0, 0);
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+	 
+	}
+	
+	public void primerae() throws Excepcion1 {
+		
+		if (entidad.get(1).getVida()<=0) {
+			
+		
+			
+			mensaje1 = true;
+			throw new Excepcion1("El personaje principal se debilitó");
+			
+		}
+		
+	}
+	
+	public void segundae() throws Excepcion2 {
+		
+		if(entidad2.get(enemigo-1).getVida()<=0) {
+			
+			mensaje2 = true;
+			throw new Excepcion2("El pokemon salvaje se debilitó");
+			
+			
+		}
+		
+	}
+
+	public void mouseClicked() {
+	
+		mensaje1=false; 
+		mensaje2=false;
+		mensaje3=false;
+		mensaje4=false; 
+	}
+
+	public void huir() {
+		
+		
+		entidad.get(0).regenerar();
+		
+	}
+
+	public void pokebol() {
+		framer4=apP.frameCount;
+		pokebol=true;
+		
+	}
 	
 	
 	

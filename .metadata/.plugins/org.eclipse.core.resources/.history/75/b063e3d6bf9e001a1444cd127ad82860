@@ -1,0 +1,20 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Pokemon4 extends Entidades{
+
+	private PApplet app;
+	private String Nombre,Poder;
+	
+	public Pokemon4(PImage imagen, String nombre, String poder) {
+		Nombre=nombre;
+		Poder=poder;
+	}
+	@Override
+	public int compareTo(Entidades arg0) {
+		// TODO Auto-generated method stub
+		return Nombre-arg0.getNombre();
+	}
+}

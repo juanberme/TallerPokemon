@@ -1,0 +1,54 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Pokemon2 extends Entidades  {
+	private PApplet app;
+	private String Nombre,Poder;
+
+	
+	
+
+	public Pokemon2(PImage imagen, String nombre, String poder, PApplet apP2) {
+		super(imagen,  nombre,  poder,apP2);
+		Nombre=nombre;
+		Poder=poder;
+			}
+
+	public String getNombre() {
+		return Nombre;
+	}
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
+	}
+
+	public String getPoder() {
+		return Poder;
+	}
+
+	public void setPoder(String poder) {
+		Poder = poder;
+	}
+	
+	public void draw(float posx,float posy){
+		
+		try {
+			
+		app.image(getImagenFinal(),posx, posy);
+		
+		}catch (NullPointerException e) {
+			
+			
+			
+		}
+	}
+
+	@Override
+	public int compareTo(Entidades o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

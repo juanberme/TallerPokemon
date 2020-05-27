@@ -1,0 +1,134 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Jugador extends Entidades {
+	
+	private PApplet app;
+	private int posx,posy,tipo=0,poxm=12,poym=10;
+	PImage eric1,eric2,eric3,eric4;
+
+	
+
+	public Jugador(int pox, int poy, PApplet apP) {
+		
+		posx=pox;
+		posy=poy;
+		app=apP;
+		eric2 = app.loadImage("../insumos/arriba.png");
+		eric1 = app.loadImage("../insumos/abajo.png");
+		eric3 = app.loadImage("../insumos/izquierda.png");
+		eric4 = app.loadImage("../insumos/derecha.png");
+		
+	}
+	
+	public int getPosx() {
+		return posx;
+	}
+
+	public void setPosx(int posx) {
+		this.posx = posx;
+	}
+
+	public int getPosy() {
+		return posy;
+	}
+
+	public void setPosy(int posy) {
+		this.posy = posy;
+	}
+
+	public int getPoxm() {
+		return poxm;
+	}
+
+	public void setPoxm(int poxm) {
+		this.poxm = poxm;
+	}
+
+	public int getPoym() {
+		return poym;
+	}
+
+	public void setPoym(int poym) {
+		this.poym = poym;
+	}
+
+	public void draw() {
+		
+		switch(getTipo()) {
+		
+		case 0:
+			
+			app.image(eric1,posx,posy);
+		
+		break;
+			
+		case 1:
+			System.out.println(getTipo());
+			app.image(eric2, posx, posy);
+			
+		break;	
+		
+		case 2:
+			app.image(eric3, posx, posy);
+			
+		break;
+		
+		case 3:
+			app.image(eric4, posx, posy);
+			
+		break;
+		
+		
+		
+		}
+		
+		
+		
+	}
+
+	public void movimientoarriba() {
+		
+		
+		
+		
+		posy= (int) (posy - (19.737));
+		setPosy(posy);
+		setTipo(1);
+		
+	}
+
+	
+
+	public void movimientoabajo() {
+		posy= (int) (posy + (19.737));
+		setTipo(0);
+		
+		
+	}
+
+	public void movimientoladod() {
+		posx= (int) (posx + (21.739));
+		setTipo(3);
+		
+	}
+
+	public void movimientoladoi() {
+
+		posx= (int) (posx - (21.739));
+		setTipo(2);
+		
+	}
+	
+	
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+}

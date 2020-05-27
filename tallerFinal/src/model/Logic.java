@@ -2,7 +2,7 @@ package model;
 
 import java.util.Collections;
 import java.util.LinkedList;
-
+import controlP5.*;
 import exceptions.Excepcion1;
 import exceptions.Excepcion2;
 import exceptions.Excepcion3;
@@ -13,6 +13,7 @@ public class Logic {
 	private LinkedList <Entidades> entidad;
 	private LinkedList <Entidades> entidad2;
 	private LinkedList <Usuario> user;
+	private LinkedList <Usuario> registro;
 	private int pantalla,pox,poy;
 	private int matrizMapa[][] = 
 		{	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -69,6 +70,12 @@ public class Logic {
 	PImage tresIzq, dosIzq, unoIzq, tresDer, dosDer, unoDer;
 	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex,mens1,mens2,mens3,mens4;
 	
+	private nombre name;
+	private ControlP5 cp5;
+	private Textfield epa;
+	
+	
+	private String hola;
 	private PoderValue pv;
 	private NombreValue nv;
 	float posx = 239;
@@ -76,7 +83,8 @@ public class Logic {
 	boolean escogeOsquirtle,escogeCharmalian,escogeBermisaur,escogeRatata,entro=false,ataquemos=false,mensaje1=false, mensaje2=false, mensaje3=false,pokebol=false,mensaje4=false;
 	private int pomax,pomay,pokemn=0,ordenado,enemigo, cv1,cv2,cv3,cv4,calculadoravitalidad,framer,framer2,framer3=60,framer4;
 	private float posxper,posyper,podex=34,podey=113;
-	private String[] info1;
+	private String[] info1,info2;
+	private boolean entrada;
 	
 	public Logic(PApplet app) {
 		pantalla =0;
@@ -89,13 +97,23 @@ public class Logic {
 		entidad = new LinkedList<Entidades>();
 		entidad2 = new LinkedList<Entidades>();
 		user = new LinkedList<Usuario>();
+		registro = new LinkedList<Usuario>();
 		//crearPersonajes();
 		info1 = apP.loadStrings("../insumos/datos.txt");
+		info2 = apP.loadStrings("../insumos/Registro.txt");
 		//System.out.println(info1.length);
 		pv= new PoderValue();
 		nv= new NombreValue();
 		cargarTexto();
-		
+		name = new nombre();
+		cp5 = new ControlP5(app);
+		cp5.addTextfield("Nombre").setPosition(229, 200).setSize(150,20).setAutoClear(false).setColor(0).setColorBackground(apP.color(255,255,255,1))
+	     .setColorActive(apP.color(255,255,255,1)) 
+	     .removeBehavior() 
+	     .setLabelVisible(false)
+	     .setCaptionLabel("");
+		cargarregistro();
+		hola = cp5.get(Textfield.class, "Nombre" ).getStringValue();
 	}
 	
 	public void cargarTexto() {
@@ -202,21 +220,31 @@ public class Logic {
 		case 0:
 			apP.image(inicio, 0, 0);
 			apP.textSize(25);
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
+			
 			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 1:
 			apP.image(saludo, 0, 0);
 			apP.fill(0);
 			apP.textSize(10);
-			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			cp5.get(Textfield.class,"Nombre").setVisible(true);
+			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			hola = cp5.get(Textfield.class, "Nombre" ).getText();
+			//System.out.println(hola);
+			//user.add(new Usuario(textico,apP));
+			
+			
 			break;
 		case 2:
 			apP.image(saludoProfesor, 0, 0);
 			apP.textSize(10);
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 3:
 			apP.image(fondo, 0, 0);
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			setPokemn(pokemn);
 			if (entro==false) {
 			crearPersonajes(pokemn);
@@ -244,11 +272,11 @@ public class Logic {
 		// pokedex 
 		case 4:
 			apP.image(pokedex, 0, 0);
-
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			apP.textSize(10);
 			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			
-			
+			//System.out.println(entidad2.size());
 			//entidad2.get(0).draw(podex,podey);
 			
 			for (int i=0;i<entidad2.size();i++) {
@@ -260,16 +288,30 @@ public class Logic {
 				
 			}
 			podey=113;
-			
+
+		
 			break;
 
 			
 		// registros	
 		case 5:
+			
 			apP.image(registros, 0, 0);
-
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			apP.textSize(10);
-			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
+			int posy =140;
+			//System.out.println(registro.size());
+			for(int i=0;i<registro.size();i++) {
+				
+				apP.textSize(10);
+				apP.text("Nombre: "+ registro.get(i).getNombre()+" Fecha: "+registro.get(i).getFechas(),100, posy);
+				posy=posy+20;
+				
+			}
+			
+			
+			
+			apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		
 			
@@ -277,7 +319,7 @@ public class Logic {
 		case 6:
 			
 			apP.image(batalla, 0, 0);
-			
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			if (getPokemn()==1) {
 				
 				apP.image(osqIzquierda, 0, 0);
@@ -323,7 +365,7 @@ public class Logic {
 			
 		break;
 		case 7:
-			
+			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			apP.image(ataque, 0, 0);
 			
 			if (getPokemn()==1) {
@@ -465,6 +507,30 @@ public class Logic {
 		
 	}
 
+	
+	public void cargarregistro() {
+		try {
+		for (int j = 0; j < info2.length; j++) {
+			String[] inf2 = info2[j].split(",");
+			
+
+				String nombre = inf2[0];
+				String fecha = inf2[1];
+				
+
+				registro.add(new Usuario(nombre,fecha, apP));
+				System.out.println("entra");
+			
+
+		}
+		}catch (NullPointerException e) {
+			
+			
+		}
+		
+	}
+	
+	
 	public int[][] getMatrizMapa() {
 		return matrizMapa;
 	}
@@ -752,8 +818,34 @@ public class Logic {
 		pokebol=true;
 		
 	}
+
 	
 	
+	public void guardado() {
+		int dia, mes, anio, hora, minuto;
+		
+		
+		dia = apP.day();
+		mes = apP.month();
+		anio = apP.year();
+
+		registro.add(new Usuario(hola,dia+"-"+mes+"-"+anio,apP));
+		
+	}
+
+
+	public void organizarnombre() {
+		
+		Collections.sort(registro,name);
+		
+		
+	}
+	
+	public void organizarfecha() {
+		
+		
+		
+	}
 	
 	
 }

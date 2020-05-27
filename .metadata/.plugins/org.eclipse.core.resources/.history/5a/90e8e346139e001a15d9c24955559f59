@@ -1,0 +1,19 @@
+package model;
+
+import processing.core.PApplet;
+
+public class Pokemon0 extends Entidades {
+
+	private int pokemon,vida;
+	private PApplet app;
+	
+	public Pokemon0(int i, PApplet apP, int pokemn) {
+		
+		app=apP;
+		pokemon= pokemn;
+		vida= i;
+		
+		
+	}
+
+}

@@ -1,0 +1,16 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Pokemon1 extends Entidades  {
+
+	public Pokemon1(int i, PApplet apP) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Pokemon1(PImage imagen, String nombre, String poder) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

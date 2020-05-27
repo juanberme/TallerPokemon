@@ -1,0 +1,22 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Pokemon3 extends Entidades  {
+
+	private PApplet app;
+	private String Nombre,Poder;
+	
+	
+	public Pokemon3(PImage imagen, String nombre, String poder) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	@Override
+	public int compareTo(Entidades arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

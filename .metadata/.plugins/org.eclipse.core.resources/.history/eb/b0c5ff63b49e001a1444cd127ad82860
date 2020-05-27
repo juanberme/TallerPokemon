@@ -1,0 +1,203 @@
+package model;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Pokemon0 extends Entidades {
+
+	private int pokemon,vida,tipo;
+	private PApplet app;
+	private float posXper,posYper;
+	PImage derJuli, derOsqui, frenteBermi, derBermi, frenteOsqui, atrasBermi, frenteJuli, izqBermi, izqJuli, izqOsqui;
+	
+	public Pokemon0(int i, PApplet apP, int pokemn, float posxper, float posyper) {
+	
+		app=apP;
+		pokemon= pokemn;
+		System.out.println(pokemon);
+		vida= i;
+		posXper = posxper;
+		posYper = posyper; 
+		tipo=0;
+		derJuli = apP.loadImage("../insumos/derJuli.png");
+		derOsqui = apP.loadImage("../insumos/derOsqui.png");
+		frenteBermi = apP.loadImage("../insumos/frenteBermi.png");
+		derBermi = apP.loadImage("../insumos/derBermi.png");
+		frenteOsqui = apP.loadImage("../insumos/frenteOsqui.png");
+		atrasBermi = apP.loadImage("../insumos/atrasBermi.png");
+		frenteJuli = apP.loadImage("../insumos/frenteBermi.png");
+		izqBermi = apP.loadImage("../insumos/izqBermi.png");
+		izqJuli = apP.loadImage("../insumos/izqJuli.png");
+		izqOsqui = apP.loadImage("../insumos/izqOsqui.png");
+	}
+	
+	
+	public void draw(){
+		
+		if(pokemon==1) {
+			
+			switch (tipo) {
+			
+			case 0: 
+				System.out.println("entro");
+				app.image(frenteOsqui, posXper, posYper);
+			
+			break;
+			
+			case 1: 
+				
+				app.image(izqOsqui, posXper, posYper);
+				
+			break;
+			
+			case 2:
+				app.image(izqOsqui, posXper, posYper);
+				
+			break;
+			
+			case 3:
+				app.image(derOsqui, posXper, posYper);
+			break;
+			
+			
+			}
+			
+		}else if(pokemon==2) {
+			
+			switch (tipo) {
+			
+			case 0: 
+				app.image(frenteJuli, posXper, posYper);
+			
+			break;
+			
+			case 1: 
+				
+				app.image(izqJuli, posXper, posYper);
+				
+			break;
+			
+			case 2:
+				app.image(izqJuli, posXper, posYper);
+				
+			break;
+			
+			case 3:
+				app.image(derJuli, posXper, posYper);
+			break;
+			
+			
+			}
+			
+			
+		}else if (pokemon==3) {
+			
+			switch (tipo) {
+			
+			case 0: 
+				app.image(frenteBermi, posXper, posYper);
+			
+			break;
+			
+			case 1: 
+				
+				app.image(atrasBermi, posXper, posYper);
+				
+			break;
+			
+			case 2:
+				app.image(izqBermi, posXper, posYper);
+				
+			break;
+			
+			case 3:
+				app.image(derBermi, posXper, posYper);
+			break;
+			
+			
+			}
+			
+		}
+		
+		
+	}	
+
+public void movimientoarriba() {
+		
+		
+		
+		
+		posYper=  (float) (posYper + (19.737));
+		
+		
+		setPosYper(posYper);
+		setTipo(1);
+		
+	}
+
+	
+
+	public void movimientoabajo() {
+		posYper= (float)(posYper - (19.737));
+		
+		
+		setPosYper(posYper);
+		
+		setTipo(0);
+		
+		
+	}
+
+	public void movimientoladod() {
+		posXper=(float) (posXper - (21.739));
+		
+		
+		setPosXper(posXper);
+		setTipo(3);
+		
+	}
+
+	public void movimientoladoi() {
+
+		posXper= (float)(posXper + (21.739));
+		
+		
+		setPosXper(posXper);
+		setTipo(2);
+		
+	}
+
+
+	public int getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public float getPosXper() {
+		return posXper;
+	}
+
+
+	public void setPosXper(float posXper) {
+		this.posXper = posXper;
+	}
+
+
+	public float getPosYper() {
+		return posYper;
+	}
+
+
+	public void setPosYper(float posYper) {
+		this.posYper = posYper;
+	}
+	
+	
+	
+
+}

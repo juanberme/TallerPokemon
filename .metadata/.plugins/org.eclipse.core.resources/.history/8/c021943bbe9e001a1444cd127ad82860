@@ -1,0 +1,11 @@
+package model;
+
+import processing.core.PImage;
+
+public class Pokemon4 extends Entidades{
+
+	public Pokemon4(PImage imagen, String nombre, String poder) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

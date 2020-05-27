@@ -587,10 +587,6 @@ public class Logic {
 
 	
 	public void cargarregistro() {
-		
-		
-		
-		// Excepcion Runtime, aquí cargamos los registro previos que tenemos en un TXT
 		try {
 		for (int j = 0; j < info2.length; j++) {
 			String[] inf2 = info2[j].split(",");
@@ -630,14 +626,12 @@ public class Logic {
 		this.pantalla = pantalla;
 	}
 
-	
-	// Movimientos que se llaman para que el persona se mueva, sin embargo, evalua cual es la casilla para saber si puede pasar
 	public void movimientoarriba() {
 		
-		
+		//System.out.println("arriba");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		if(matrizMapa[pomay-1][pomax]==0 || matrizMapa[pomay-1][pomax]==3 ) {
 			
 			entidad.get(0).setArribita(1);
@@ -651,10 +645,10 @@ public class Logic {
 	}
 	public void movimientoabajo() {
 		
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay+1][pomax]==0 || matrizMapa[pomay+1][pomax]==3) {
 		
@@ -666,10 +660,10 @@ public class Logic {
 		
 	}
 	public void movimientoladod() {
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		
 		if(matrizMapa[pomay][pomax+1]==0 || matrizMapa[pomay][pomax+1]==3) {
@@ -682,10 +676,10 @@ public class Logic {
 	}
 	public void movimientoladoi() {
 		
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay][pomax-1]==0 || matrizMapa[pomay][pomax-1]==3) {
 		entidad.get(0).setIzquier(1);
@@ -702,18 +696,16 @@ public class Logic {
 	}
 
 	
-	// Metodo de ordenar pokemones 
+	
 	public void ordenar(int i) {
 		
 		
 		switch (i) {
-		
-		//Ordena por Poder
 		case 0:
 			Collections.sort(entidad2,pv);
 			
 			break;
-		//Ordena por nombre
+
 		case 1:
 			Collections.sort(entidad2,nv);
 			
@@ -722,7 +714,7 @@ public class Logic {
 		}
 		
 	}
-// Este es el metodo para evaluar la probabilidad de combate y su aleatoreidad
+
 	public void zonaCombate() {
 		
 		
@@ -730,19 +722,13 @@ public class Logic {
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
 		
-		
-		// Tiene que estar en la hierba alta que es 3 
 		if(matrizMapa[pomay][pomax]==3 ) {
 			
-			
-			// Randomico del 1 al 10 
 			int posi= (int) apP.random(1,11);
-			
-			// Si esta dentro del 20 porciento aparece un pokemon salvaje 
+			//System.out.println(posi);
 			if(posi>1 && posi<=2) {
+				System.out.println(posi);
 				
-				 
-			// Aleatorio del enemigo
 				enemigo= (int) apP.random(1,5);
 				
 				setPantalla(6);
@@ -756,7 +742,7 @@ public class Logic {
 		
 	}
 
-	// Ataques que van restando la vida del enemigo
+	
 	public void ataque1() {
 		framer=apP.frameCount;
 		int ataquecito = entidad.get(1).getAt1();
@@ -791,10 +777,6 @@ public class Logic {
 		framer2 = apP.frameCount;
 	}
 
-	
-	
-	
-	// Indica cuando estamos atacando 
 	public boolean isAtaquemos() {
 		return ataquemos;
 	}
@@ -803,13 +785,11 @@ public class Logic {
 		this.ataquemos = ataquemos;
 	}
 	
-	
-	// Calcula la vida de los personajes implicados para saber cuando lanzar la excepcion, ademas de restar los corazones 
 	public void vida()
 	{
 		
 	 calculadoravitalidad = 100 * entidad.get(1).getVida()/230;
-		
+		//System.out.println(calculadoravitalidad);
 	 if(calculadoravitalidad > 0) {
 		 apP.image(unoIzquierda, 0, 0);
 		 if(calculadoravitalidad > 21) {
@@ -873,8 +853,6 @@ public class Logic {
 	
 	public void primerae() throws Excepcion1 {
 		
-		
-		
 		if (entidad.get(1).getVida()<=0) {
 			
 		
@@ -887,8 +865,6 @@ public class Logic {
 	}
 	
 	public void segundae() throws Excepcion2 {
-		
-		
 		
 		if(entidad2.get(enemigo-1).getVida()<=0) {
 			
@@ -910,7 +886,7 @@ public class Logic {
 
 	public void huir() {
 		
-		// Reinicia la posicion
+		
 		entidad.get(0).regenerar();
 		
 	}
@@ -922,7 +898,7 @@ public class Logic {
 	}
 
 	
-	// Guarda el resgitro en la linkeList
+	
 	public void guardado() {
 		int dia, mes, anio, hora, minuto;
 		
@@ -935,8 +911,7 @@ String fechota = dia+"-"+"0"+mes+"-"+anio;
 		
 	}
 
-	
-// Organiza registor por nombre
+
 	public void organizarnombre() {
 		
 		Collections.sort(registro,name);
@@ -944,9 +919,6 @@ String fechota = dia+"-"+"0"+mes+"-"+anio;
 		
 	}
 	
-	
-	
-	// Organiza Registro por fecha
 	public void organizarfecha() {
 		
 		Collections.sort(registro,fechita);

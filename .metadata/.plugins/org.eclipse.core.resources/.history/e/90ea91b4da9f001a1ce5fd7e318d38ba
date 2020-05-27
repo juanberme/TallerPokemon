@@ -7,7 +7,6 @@ import view.Main;
 
 public class Main_Controller {
 
-	// Declaracion de instancias de logia y de variables
 	private Logic lo;
 	private PApplet app;
 	private int pantallas=0;
@@ -26,8 +25,6 @@ public class Main_Controller {
 		
 	}
 
-	
-	
 	public void mousePressed() {
 
 		// Boton Start
@@ -75,8 +72,6 @@ public class Main_Controller {
 			
 		}
 		
-		
-		// Boton de batalla
 		if (lo.getPantalla()==6 && app.mouseY > 310 && app.mouseY < 327 && app.mouseX > 289 && app.mouseX < 349) {
 			lo.setPantalla(7);
 			
@@ -114,7 +109,7 @@ public class Main_Controller {
 			lo.setAtaquemos(true);
 		}
 		
-		
+		// Pokebola
 		
 		
 		
@@ -157,7 +152,6 @@ public class Main_Controller {
 		
 		
 		// En menu para pasar a pokedex
-		
 		if (lo.getPantalla()==3 && (key == 'p' || key == 'P')) {
 			lo.setPantalla(4);
 		} else {
@@ -210,9 +204,6 @@ public class Main_Controller {
 
 	public void mouseClicked() {
 		
-		
-		
-		// llamar a la pokebola
 		lo.mouseClicked();
 		
 if (lo.getPantalla()==7 && app.mouseY > 321 && app.mouseY < 346 && app.mouseX > 392 && app.mouseX < 470) {

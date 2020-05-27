@@ -24,8 +24,6 @@ public class OrdenarFecha implements Comparator<Usuario>{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return usuario1.compareTo(usuario2);
 	}
 	

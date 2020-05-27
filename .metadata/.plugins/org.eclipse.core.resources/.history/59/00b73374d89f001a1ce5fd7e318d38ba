@@ -13,7 +13,7 @@ public class OrdenarFecha implements Comparator<Usuario>{
 	
 	@Override
 	public int compare(Usuario o1, Usuario o2) {
-		DateFormat df= new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat df= new SimpleDateFormat("dd-M-yyyy");
 		Date usuario1 = null;
 		Date usuario2= null;
 		try {
@@ -24,8 +24,6 @@ public class OrdenarFecha implements Comparator<Usuario>{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return usuario1.compareTo(usuario2);
 	}
 	

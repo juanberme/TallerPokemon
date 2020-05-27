@@ -41,10 +41,6 @@ public class Logic {
 			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,1,1},
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	
-	
-	
-	//Declaracion de imagenes
 	private PApplet apP;
 	PImage fondo,batalla;
 	PImage fondoCuadricula;
@@ -79,8 +75,6 @@ public class Logic {
 	PImage tresIzq, dosIzq, unoIzq, tresDer, dosDer, unoDer;
 	PImage juliPokedex, osquiPokedex, rataPokedex, bermiPokedex, pokedex,mens1,mens2,mens3,mens4;
 	
-	
-	// Declaracion de instancias y variables 
 	private nombre name;
 	private ControlP5 cp5;
 	private Textfield epa;
@@ -97,37 +91,26 @@ public class Logic {
 	private String[] info1,info2;
 	private boolean entrada;
 	
-	
-	// Iniciación de variables, el famoso Constructor
 	public Logic(PApplet app) {
 		pantalla =0;
 		apP=app;
 		cargarImagenes();
-		
 		escogeOsquirtle = false;
 		escogeCharmalian = false;
 		escogeBermisaur = false;
 		escogeRatata = false;
-		
-		
-		
 		entidad = new LinkedList<Entidades>();
 		entidad2 = new LinkedList<Entidades>();
 		user = new LinkedList<Usuario>();
 		registro = new LinkedList<Usuario>();
-		
-		
-		
+		//crearPersonajes();
 		info1 = apP.loadStrings("../insumos/datos.txt");
 		info2 = apP.loadStrings("../insumos/Registro.txt");
-		
-		
+		//System.out.println(info1.length);
 		pv= new PoderValue();
 		nv= new NombreValue();
 		cargarTexto();
 		name = new nombre();
-		
-		// Todo lo del input de texto 
 		cp5 = new ControlP5(app);
 		fechita = new OrdenarFecha();
 		cp5.addTextfield("Nombre").setPosition(229, 200).setSize(150,20).setAutoClear(false).setColor(0).setColorBackground(apP.color(255,255,255,1))
@@ -141,8 +124,6 @@ public class Logic {
 	
 	public void cargarTexto() {
 		
-		
-		// Cargar el texto con los datos de un texto para crear cuatro tipos de animales salvajes
 		for (int i=0; i<info1.length;i++) {
 			String[] ordenar= info1[i].split(",");
 			String nombre = ordenar[0];
@@ -174,8 +155,6 @@ public class Logic {
 	
 	public void cargarImagenes() {
 		
-		
-		// Cargar las diferentes imagenes 
 		fondo = apP.loadImage("../insumos/fondo.png");
 		fondoCuadricula = apP.loadImage("../insumos/fondoCuadricula.png");
 		inicio = apP.loadImage("../insumos/inicio.png");
@@ -229,11 +208,10 @@ public class Logic {
 	
 	public void crearPersonajes(int pokemn2) {
 		
-		
-		//Aquí creamos el personaje y el pokemon inicial de acuerdo a como el elija
 		entidad.add(new Jugador(posx,posy,apP));
 		posxper= entidad.get(0).getPosx();
 		posyper =(entidad.get(0).getPosy());
+		//System.out.println(pokemn2);
 		entidad.add(new Pokemon0(230,apP,pokemn2,posxper,posyper));
 		
 		
@@ -246,79 +224,70 @@ public class Logic {
 		switch (pantalla) {
 
 		case 0:
-			
-			//Pantalla inicial con el logo 
 			apP.image(inicio, 0, 0);
 			apP.textSize(25);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			
-			
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 1:
-			
-			
-			//Pantalla de colocar el nombre, activamos el CP5 para permitir el input
 			apP.image(saludo, 0, 0);
 			apP.fill(0);
 			apP.textSize(10);
 			cp5.get(Textfield.class,"Nombre").setVisible(true);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			hola = cp5.get(Textfield.class, "Nombre" ).getText();
-			
+			//System.out.println(hola);
+			//user.add(new Usuario(textico,apP));
 			
 			
 			break;
 		case 2:
-			
-			
-			//Pantalla donde aparece el saludo del profesor y eleccion de diferentes pokemones
 			apP.image(saludoProfesor, 0, 0);
 			apP.textSize(10);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
-			
-			
-			
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 		case 3:
-			
-			
-			// Pantalla donde esta el mapa del juego
 			apP.image(fondo, 0, 0);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			setPokemn(pokemn);
-			
-			
-			// Aqui creamos los diferentes personajes del juego (personaje principal y pokemon elegido)
 			if (entro==false) {
 			crearPersonajes(pokemn);
 			entro=true;
+			
+			
 			}
-			
-			
 			//personaje inicial
 			entidad.get(0).draw();
 			entidad.get(1).draw(entidad.get(0).getPosx(),entidad.get(0).getPosy());
 			
 			
-			//Aquí activamos el Hilo
 			for(int i=0;i<2;i++) {
 			Thread Nh;
 			Nh = new Thread(entidad.get(i));
 			Nh.start();
 			
+			
 			}
 
-			
+			apP.textSize(10);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			break;
 
-		// Pantalla de la pokedex 
+		// pokedex 
 		case 4:
 			apP.image(pokedex, 0, 0);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
+			apP.textSize(10);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			
-			//Aqui usamos el arreglo de entidad 2, donde tenemos los otros pokemones que consideramos salvajes y mostramos el arreglo
+			//System.out.println(entidad2.size());
+			//entidad2.get(0).draw(podex,podey);
+			
 			for (int i=0;i<entidad2.size();i++) {
 				
-				
+				//System.out.println("entra");
 				entidad2.get(i).draw(podex,podey);
 				podey=podey+60;
 			
@@ -330,15 +299,14 @@ public class Logic {
 			break;
 
 			
-		// Registro, aqui muestra la pantalla donde pinta los diferentes registros 
+		// registros	
 		case 5:
 			
 			apP.image(registros, 0, 0);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			apP.textSize(10);
 			int posy =140;
-			
-			// Este for recorre la linkenlist donde se aloja el registro
+			//System.out.println(registro.size());
 			for(int i=0;i<registro.size();i++) {
 				
 				apP.textSize(10);
@@ -353,15 +321,12 @@ public class Logic {
 			break;
 		
 			
-		//Esta es cuando entra a batalla pero puede elegir si huir o pelear
+		//Zona de combate
 		case 6:
 			
 			apP.image(batalla, 0, 0);
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
-			
-			// Aqui llega la informacion y se muestra siempre nuestro pokemon
 			if (getPokemn()==1) {
-				
 				
 				apP.image(osqIzquierda, 0, 0);
 				
@@ -377,9 +342,6 @@ public class Logic {
 				
 			}
 			
-			
-			
-			// Aqui llega la imagen de nuestro contrincante el cual es aleatorio. depende del aleatorio muestra la imagen
 			if(enemigo==1) {
 				
 				apP.image(charDerecha, 0, 0);
@@ -401,27 +363,17 @@ public class Logic {
 				apP.image(osqDerecha, 0, 0);
 				apP.image(tresDer, 0, 0);
 			}
-			
-			
-			// El nivel de nuestro pokemon
 			apP.image(dosIzq, 0, 0);
 			
-			
+			apP.textSize(10);
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			
 			
 		break;
-		
-		
-		// Zona de batalla, aqui aparecen los diferentes poderes para atacar
 		case 7:
-			
-			
-			
 			cp5.get(Textfield.class,"Nombre").setVisible(false);
 			apP.image(ataque, 0, 0);
 			
-			
-			// Nuestro pokemon
 			if (getPokemn()==1) {
 				
 				apP.image(osqIzquierda, 0, 0);
@@ -438,8 +390,6 @@ public class Logic {
 				
 			}
 			
-			
-			// Pokemon elegido de forma aleatoria previamente
 			if(enemigo==1) {
 				
 				apP.image(charDerecha, 0, 0);
@@ -462,21 +412,17 @@ public class Logic {
 				apP.image(tresDer, 0, 0);
 			}
 			
-			
-			
-			// Aqui es cuando nos ataca el enemigo nos resta salud, tiene un framecount para que espere un tiempo despues de nuestro ataque
 			if (ataquemos==true) {
 				
 				if(apP.frameCount - framer == 60) {
 				int vidita = entidad.get(1).getVida();
 				int ataque = entidad2.get(enemigo-1).getAt1();
 				entidad.get(1).setVida(vidita-ataque);
+				//System.out.println(entidad.get(1).getVida());
 				ataquemos=false;
 				
 				}
 			}
-			
-			// Primera excepcion, la cual indica si nuestro personaje se debilitó
 			try {
 				
 				primerae();
@@ -487,8 +433,6 @@ public class Logic {
 				
 				
 			}
-			
-			// Segunda excepcion, la cual indica si nuestro contrincante se debilitó
 			try {
 				
 				segundae();
@@ -500,11 +444,10 @@ public class Logic {
 				
 			}
 			
-			// Cuando lance una pokebola, dice que el contrincante aun es muy fuerte
 			if (pokebol==true && (cv1 > 41 || cv2 > 41 || cv3 > 41 || cv4 > 41)) {
 				
 				mensaje3 = true;
-			//Permite captura	
+				
 			}else if (pokebol==true && (cv1 < 41 || cv2 < 41 || cv3 < 41 || cv4 < 41)){
 				
 				mensaje4=true;
@@ -512,57 +455,42 @@ public class Logic {
 			}
 			
 			
-			// Muestra en numero la salud de nuestros personajes y su enemigo
+			
 			apP.image(dosIzq, 0, 0);
 			apP.textSize(20);
 			apP.text(entidad.get(1).getVida(), 186, 150);
 			apP.text(entidad2.get(enemigo-1).getVida(), 457, 150);
 			apP.textSize(10);
-			
-			
-			// Metodo de vida
+			//apP.text(("x: " + apP.mouseX + ", y: " + apP.mouseY), apP.mouseX, apP.mouseY);
 			vida();
 			
-			
-			// Se lanza mensaje cuando perdemos 
 			if (mensaje1==true) {
 				apP.image(mens1, 0, 0);
 				if(apP.frameCount - framer2 == 90) {
-					
-					// Aqui regeneramos la vida de todos los personajes y la posicion inicial del usuario para sacarlo de la hierva
 					entidad.get(1).regenerar();
 					entidad2.get(enemigo-1).regenerar();
 					entidad.get(0).regenerar();
 					pantalla=3;
-					
+					//mensaje1=false;
 					}
 			}
 			
-			
-			// Se lanza mensjae cuando perdemos 
 			if (mensaje2==true) {
 				apP.image(mens2, 0, 0);
 				if(apP.frameCount - framer2 == 90) {
-					
-					// Aqui regeneramos la vida de todos los personajes y la posicion inicial del usuario para sacarlo de la hierva
 					entidad.get(1).regenerar();
 					entidad2.get(enemigo-1).regenerar();
 					entidad.get(0).regenerar();
 					pantalla=3;
-					
+					//mensaje1=false;
 					}
 			}
-			
-			
-			//No se captura, sigue la batalla
 			if (mensaje3==true) {
 				apP.image(mens3, 0, 0);
 				pokebol=false;
 			
 			}
 			
-			
-			// Se captura y se regenerna todos 
 			if (mensaje4==true) {
 				apP.image(mens4, 0, 0);
 				pokebol=false;
@@ -571,7 +499,7 @@ public class Logic {
 					entidad2.get(enemigo-1).regenerar();
 					entidad.get(0).regenerar();
 					pantalla=3;
-					
+					//mensaje1=false;
 					}
 			}
 			
@@ -587,10 +515,6 @@ public class Logic {
 
 	
 	public void cargarregistro() {
-		
-		
-		
-		// Excepcion Runtime, aquí cargamos los registro previos que tenemos en un TXT
 		try {
 		for (int j = 0; j < info2.length; j++) {
 			String[] inf2 = info2[j].split(",");
@@ -630,14 +554,12 @@ public class Logic {
 		this.pantalla = pantalla;
 	}
 
-	
-	// Movimientos que se llaman para que el persona se mueva, sin embargo, evalua cual es la casilla para saber si puede pasar
 	public void movimientoarriba() {
 		
-		
+		//System.out.println("arriba");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		if(matrizMapa[pomay-1][pomax]==0 || matrizMapa[pomay-1][pomax]==3 ) {
 			
 			entidad.get(0).setArribita(1);
@@ -651,10 +573,10 @@ public class Logic {
 	}
 	public void movimientoabajo() {
 		
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay+1][pomax]==0 || matrizMapa[pomay+1][pomax]==3) {
 		
@@ -666,10 +588,10 @@ public class Logic {
 		
 	}
 	public void movimientoladod() {
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		
 		if(matrizMapa[pomay][pomax+1]==0 || matrizMapa[pomay][pomax+1]==3) {
@@ -682,10 +604,10 @@ public class Logic {
 	}
 	public void movimientoladoi() {
 		
-		
+		//System.out.println("entro");
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
-		
+		//System.out.println(matrizMapa[pomay][pomax]);
 		
 		if(matrizMapa[pomay][pomax-1]==0 || matrizMapa[pomay][pomax-1]==3) {
 		entidad.get(0).setIzquier(1);
@@ -702,18 +624,16 @@ public class Logic {
 	}
 
 	
-	// Metodo de ordenar pokemones 
+	
 	public void ordenar(int i) {
 		
 		
 		switch (i) {
-		
-		//Ordena por Poder
 		case 0:
 			Collections.sort(entidad2,pv);
 			
 			break;
-		//Ordena por nombre
+
 		case 1:
 			Collections.sort(entidad2,nv);
 			
@@ -722,7 +642,7 @@ public class Logic {
 		}
 		
 	}
-// Este es el metodo para evaluar la probabilidad de combate y su aleatoreidad
+
 	public void zonaCombate() {
 		
 		
@@ -730,19 +650,13 @@ public class Logic {
 		pomax= entidad.get(0).getPoxm();
 		pomay= entidad.get(0).getPoym();
 		
-		
-		// Tiene que estar en la hierba alta que es 3 
 		if(matrizMapa[pomay][pomax]==3 ) {
 			
-			
-			// Randomico del 1 al 10 
 			int posi= (int) apP.random(1,11);
-			
-			// Si esta dentro del 20 porciento aparece un pokemon salvaje 
+			//System.out.println(posi);
 			if(posi>1 && posi<=2) {
+				System.out.println(posi);
 				
-				 
-			// Aleatorio del enemigo
 				enemigo= (int) apP.random(1,5);
 				
 				setPantalla(6);
@@ -756,7 +670,7 @@ public class Logic {
 		
 	}
 
-	// Ataques que van restando la vida del enemigo
+	
 	public void ataque1() {
 		framer=apP.frameCount;
 		int ataquecito = entidad.get(1).getAt1();
@@ -791,10 +705,6 @@ public class Logic {
 		framer2 = apP.frameCount;
 	}
 
-	
-	
-	
-	// Indica cuando estamos atacando 
 	public boolean isAtaquemos() {
 		return ataquemos;
 	}
@@ -803,13 +713,11 @@ public class Logic {
 		this.ataquemos = ataquemos;
 	}
 	
-	
-	// Calcula la vida de los personajes implicados para saber cuando lanzar la excepcion, ademas de restar los corazones 
 	public void vida()
 	{
 		
 	 calculadoravitalidad = 100 * entidad.get(1).getVida()/230;
-		
+		//System.out.println(calculadoravitalidad);
 	 if(calculadoravitalidad > 0) {
 		 apP.image(unoIzquierda, 0, 0);
 		 if(calculadoravitalidad > 21) {
@@ -873,8 +781,6 @@ public class Logic {
 	
 	public void primerae() throws Excepcion1 {
 		
-		
-		
 		if (entidad.get(1).getVida()<=0) {
 			
 		
@@ -887,8 +793,6 @@ public class Logic {
 	}
 	
 	public void segundae() throws Excepcion2 {
-		
-		
 		
 		if(entidad2.get(enemigo-1).getVida()<=0) {
 			
@@ -910,7 +814,7 @@ public class Logic {
 
 	public void huir() {
 		
-		// Reinicia la posicion
+		
 		entidad.get(0).regenerar();
 		
 	}
@@ -922,7 +826,7 @@ public class Logic {
 	}
 
 	
-	// Guarda el resgitro en la linkeList
+	
 	public void guardado() {
 		int dia, mes, anio, hora, minuto;
 		
@@ -935,8 +839,7 @@ String fechota = dia+"-"+"0"+mes+"-"+anio;
 		
 	}
 
-	
-// Organiza registor por nombre
+
 	public void organizarnombre() {
 		
 		Collections.sort(registro,name);
@@ -944,9 +847,6 @@ String fechota = dia+"-"+"0"+mes+"-"+anio;
 		
 	}
 	
-	
-	
-	// Organiza Registro por fecha
 	public void organizarfecha() {
 		
 		Collections.sort(registro,fechita);
